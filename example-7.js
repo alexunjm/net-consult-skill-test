@@ -46,6 +46,11 @@ console.log('---- EXAMPLE 7 part 2 --- ', removeCompany(1));
 // permitiendo hacer un PATCH (como con una llamada HTTP) en todos los
 // atributos de esta "company" excepto en el atributo "users".
 
+/**
+ * get url and body to make patch (this is a sim)
+ * @param {Number} companyId id of company
+ * @return {Object} object with url an body
+ */
 const patchCompany = (companyId) => {
   // PATCH to the resource id = 1
   // update that task is completed
