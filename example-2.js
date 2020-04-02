@@ -2,7 +2,10 @@ import {cleanConsole, createAll} from './data';
 const companies = createAll();
 
 const filterUsersFromCompaniesWithCar = (companies, hasCar) => {
-  return companies;
+  return companies.filter((company) => {
+    company.users = company.users.filter((user) => user.car == hasCar);
+    return company;
+  });
 };
 
 cleanConsole(2, companies);
