@@ -4,17 +4,39 @@ const companies = createAll();
 cleanConsole(7, companies);
 
 /**
+ * get the index of array by id
+ * @param {Number} id id to find
+ * @param {Array<{id}>} arr array to loop
+ * @return {Number} index of array
+ */
+const getIndexById = (id, arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id == id) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+/**
  * get the index of company by id in companies array
  * @param {Number} companyId id of company to get index
  * @return {Number} index of companies array
  */
 const getIndexOfCompanyById = (companyId) => {
-  for (let i = 0; i < companies.length; i++) {
-    if (companies[i].id == companyId) {
-      return i;
-    }
-  }
-  return -1;
+  return getIndexById(companyId, companies);
+};
+
+/**
+ * get the index of company and user in companies array
+ * @param {Number} companyId id of company to get index
+ * @param {Number} userId id of user to get index
+ * @return {{indexCompany, indexUser}} index of companies array
+ */
+const getIndexOfUserCompany = (companyId, userId) => {
+  const indexCompany = getIndexOfCompanyById(companyId);
+  const indexUser = getIndexById(userId, companies[indexCompany].users);
+  return {indexCompany, indexUser};
 };
 
 // -----------------------------------------------------------------------------
@@ -66,8 +88,6 @@ const patchCompany = (companyId) => {
   delete company.users;
 
   const url = `https://alexanderjaramillo.com/company/${companyId}`;
-  console.log({company});
-
   const body = JSON.stringify(company);
   /*
   fetch(url, {
@@ -94,7 +114,7 @@ console.log('---- EXAMPLE 7 part 3 --- ', patchCompany(2));
  * Add new user to Company users property
  * @param {Number} companyId id of company
  * @param {{firstName: 'Juan', lastName: 'Delgado', age: 35, car: true}} user Optional user to add
- * @return {Object} object with url an body
+ * @return {Object} company updated
  */
 const addNewUser = (companyId, user = {firstName: 'Juan', lastName: 'Delgado', age: 35, car: true}) => {
   const index = getIndexOfCompanyById(companyId);
@@ -107,19 +127,63 @@ const addNewUser = (companyId, user = {firstName: 'Juan', lastName: 'Delgado', a
 };
 
 console.log('---- EXAMPLE 7 part 4 --- ', addNewUser(3));
-console.log('---- EXAMPLE 7 part 5 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 6 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 7 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 8 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 9 --- ', 'Put here your function');
 
 // Parte 5: Crear una función tomando como parámetro un "id" de "company" y
 // permitiendo hacer un PUT (como con una llamada HTTP) en esta "company" excepto
 // en el atributo "users".
 
+/**
+ * get url and body to make put (this is a sim)
+ * @param {Number} companyId id of company
+ * @return {Object} object with url an body
+ */
+const putCompany = (companyId) => {
+  const index = getIndexOfCompanyById(companyId);
+  const company = {...companies[index], updated: true};
+  delete company.updated;
+  delete company.users;
+
+  const url = `https://alexanderjaramillo.com/company/`;
+  const body = JSON.stringify(company);
+  /*
+  const xhr = new XMLHttpRequest();
+  xhr.open('PUT', url, true);
+  xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  xhr.onload = () => {
+    const company = JSON.parse(xhr.responseText);
+    if (xhr.readyState == 4 && xhr.status == '200') {
+      // success
+    } else {
+      // error
+    }
+  }
+  xhr.send(json); */
+
+  return {url, body};
+};
+console.log('---- EXAMPLE 7 part 5 --- ', putCompany(4));
+
 // Parte 6: Crear una función tomando como parámetro un "id" de "company" y un
 // "id" de "user". La función debe quitar este "user" de la lista de "users"
 // de "company" y cambiar el atributo "usersLength" de "company".
+
+/**
+ * Remove user to Company users property
+ * @param {Number} companyId id of company
+ * @param {Number} userId id of user
+ * @return {Object} company updated
+ */
+const removeUser = (companyId, userId) => {
+  const indexes = getIndexOfUserCompany(companyId, userId);
+  const result = companies[indexes.indexCompany].users.splice(indexes.indexUser, 1);
+  companies[indexes.indexCompany].usersLength = companies[indexes.indexCompany].users.length;
+  return {result, company: companies[indexes.indexCompany]};
+};
+
+console.log('---- EXAMPLE 7 part 6 --- ', removeUser(4, 1));
+console.log('---- EXAMPLE 7 part 7 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 8 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 9 --- ', 'Put here your function');
 
 // Parte 7: Crear una función tomando como parámetro un "id" de "company" y un
 // "id" de "user" que permite hacer un PATCH (como con una llamada HTTP) en este
