@@ -3,21 +3,18 @@ const companies = createAll();
 
 cleanConsole(7, companies);
 
-console.log('---- EXAMPLE 7 part 3 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 4 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 5 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 6 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 7 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 8 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 9 --- ', 'Put here your function');
-
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
 // Parte 1: Crear una función tomando como parámetro un "id" de "company" y
 // devolviendo el nombre de esta "company".
 
-const getCompany = (companyId) => {
+/**
+ * Get a name of company found on companies array
+ * @param {Number} companyId id of company to get name
+ * @return {String} Name of company found
+ */
+const getCompanyName = (companyId) => {
   for (let i = 0; i < companies.length; i++) {
     if (companies[i].id == companyId) {
       return companies[i].name;
@@ -25,20 +22,68 @@ const getCompany = (companyId) => {
   }
   return '';
 };
-console.log('---- EXAMPLE 7 part 1 --- ', getCompany(1));
+console.log('---- EXAMPLE 7 part 1 --- ', getCompanyName(1));
 
 // Parte 2: Crear una función tomando como parámetro un "id" de "company" y
 // quitando la "company" de la lista.
 
+/**
+ * Remove a company from companies array
+ * @param {Number} companyId id of company
+ * @return {Object} deleted company
+ */
+const removeCompany = (companyId) => {
+  for (let i = 0; i < companies.length; i++) {
+    if (companies[i].id == companyId) {
+      return companies.splice(i, 1);
+    }
+  }
+  return companies;
+};
+console.log('---- EXAMPLE 7 part 2 --- ', removeCompany(1));
+
 // Parte 3: Crear una función tomando como parámetro un "id" de "company" y
 // permitiendo hacer un PATCH (como con una llamada HTTP) en todos los
 // atributos de esta "company" excepto en el atributo "users".
+
+const patchCompany = (companyId) => {
+  // PATCH to the resource id = 1
+  // update that task is completed
+  const company = {...removeCompany(companyId), updated: true};
+  delete company.updated;
+  delete company.users;
+
+  const url = `https://alexanderjaramillo.com/company/${companyId}`;
+  console.log({company});
+
+  const body = JSON.stringify(company);
+  /*
+  fetch(url, {
+    method: 'PATCH',
+    body,
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+      .then((response) => response.json())
+      .then((json) => console.log(json));*/
+  return {url, body};
+};
+
+console.log('---- EXAMPLE 7 part 3 --- ', patchCompany(2));
 
 // Parte 4: Crear una función tomando como parámetro un "id" de "company" y un
 // nuevo "user" cuyo el apelido es "Delgado", el nombre "Juan", de 35 años y
 // dueño de un carro. El nuevo "user" debe agregarse a la lista de "users" de este
 // "company" y tener un "id" generado automáticamente. La función también debe modificar
 // el atributo "usersLength" de "company".
+
+console.log('---- EXAMPLE 7 part 4 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 5 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 6 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 7 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 8 --- ', 'Put here your function');
+console.log('---- EXAMPLE 7 part 9 --- ', 'Put here your function');
 
 // Parte 5: Crear una función tomando como parámetro un "id" de "company" y
 // permitiendo hacer un PUT (como con una llamada HTTP) en esta "company" excepto
