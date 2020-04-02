@@ -1,8 +1,33 @@
 import {cleanConsole, createAll} from './data';
 const companies = createAll();
 
+/**
+ * Extract users property of each Company
+ * and map each user with company name
+ * to create new sorted array
+ * with users ordered by age desc
+ * @param {Array<any>} companies Array of companies to flat
+ * @return {Array<any>} the result of array of Users sorted by age desc.
+ */
+const flatUsersFromCompaniesAndSortByAge = (companies) => {
+  /**
+   * reduce fn of array helps to create new array with users
+   */
+  const users = companies.reduce((result, company) => {
+    // map users with company property from company name
+    const usersFromCompany = company.users.map((user) => {
+      user.company = company.name;
+      return user;
+    });
+    // join prev company users array with users from current company
+    return [...result, ...usersFromCompany];
+  }, []);
+  // sort by age desc
+  return users.sort((u1, u2) => u2.age - u1.age);
+};
+
 cleanConsole(4, companies);
-console.log('---- EXAMPLE 4 --- ', 'Put here your function');
+console.log('---- EXAMPLE 4 --- ', flatUsersFromCompaniesAndSortByAge(companies));
 
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
