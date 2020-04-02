@@ -2,6 +2,16 @@ import {createAll, cleanConsole} from './data';
 const companies = createAll();
 
 const cleanAndFormatCompaniesProperties = (companies) => {
+  companies.forEach((company) => {
+    company.users.map((user) => {
+      for (const key in user) {
+        if (user.hasOwnProperty(key)) {
+          const value = user[key];
+          user[key] = value ? value : '';
+        }
+      }
+    });
+  });
   return companies;
 };
 
