@@ -3,6 +3,20 @@ const companies = createAll();
 
 cleanConsole(7, companies);
 
+/**
+ * get the index of company by id in companies array
+ * @param {Number} companyId id of company to get index
+ * @return {Number} index of companies array
+ */
+const getIndexOfCompanyById = (companyId) => {
+  for (let i = 0; i < companies.length; i++) {
+    if (companies[i].id == companyId) {
+      return i;
+    }
+  }
+  return -1;
+};
+
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
 
@@ -15,12 +29,8 @@ cleanConsole(7, companies);
  * @return {String} Name of company found
  */
 const getCompanyName = (companyId) => {
-  for (let i = 0; i < companies.length; i++) {
-    if (companies[i].id == companyId) {
-      return companies[i].name;
-    }
-  }
-  return '';
+  const companyIndex = getIndexOfCompanyById(companyId);
+  return companyIndex < 0 ? '' : companies[companyIndex].name;
 };
 console.log('---- EXAMPLE 7 part 1 --- ', getCompanyName(1));
 
@@ -33,12 +43,8 @@ console.log('---- EXAMPLE 7 part 1 --- ', getCompanyName(1));
  * @return {Object} deleted company
  */
 const removeCompany = (companyId) => {
-  for (let i = 0; i < companies.length; i++) {
-    if (companies[i].id == companyId) {
-      return companies.splice(i, 1);
-    }
-  }
-  return companies;
+  const index = getIndexOfCompanyById(companyId);
+  return companies.splice(index, 1);
 };
 console.log('---- EXAMPLE 7 part 2 --- ', removeCompany(1));
 
@@ -54,7 +60,8 @@ console.log('---- EXAMPLE 7 part 2 --- ', removeCompany(1));
 const patchCompany = (companyId) => {
   // PATCH to the resource id = 1
   // update that task is completed
-  const company = {...removeCompany(companyId), updated: true};
+  const index = getIndexOfCompanyById(companyId);
+  const company = {...companies[index], updated: true};
   delete company.updated;
   delete company.users;
 
