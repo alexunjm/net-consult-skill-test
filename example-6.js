@@ -1,9 +1,25 @@
 import {cleanConsole, createAll} from './data';
+import {flatUsersFromCompaniesAndSortByAge} from './example-4';
 
 const companies = createAll();
 
+/**
+ * Takes an array of companies and return
+ * a new object whose attributes are the concatenation of the name, first name and
+ * the age of each user. Each attribute must have the value of boolean "car"
+ * @param {Array<any>} companies Array of companies
+ * @return {Object} Object with users as key and car boolean value as value
+ */
+const companies2UserObjectDetail = (companies) => {
+  const users = flatUsersFromCompaniesAndSortByAge(companies);
+  return users.reduce((result, user) => {
+    result[`${user.firstName}${user.lastName}${user.age}`] = user.car;
+    return result;
+  }, {});
+};
+
 cleanConsole(6, companies);
-console.log('---- EXAMPLE 6 --- ', 'Put here your function');
+console.log('---- EXAMPLE 6 --- ', companies2UserObjectDetail(companies));
 
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
