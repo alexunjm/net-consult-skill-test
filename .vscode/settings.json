@@ -1,0 +1,38 @@
+{
+    "gitflow4code.features": [
+        {
+            "name": "feature/exercise1",
+            "base": "develop"
+        },
+        {
+            "name": "feature/exercise2",
+            "base": "develop"
+        },
+        {
+            "name": "feature/exercise3",
+            "base": "develop"
+        },
+        {
+            "name": "feature/exercise4",
+            "base": "develop"
+        },
+        {
+            "name": "feature/exercise5",
+            "base": "develop"
+        },
+        {
+            "name": "feature/exercise6",
+            "base": "develop"
+        },
+        {
+            "name": "feature/exercise7",
+            "base": "develop"
+        }
+    ],
+    "gitflow4code.releases": [
+        {
+            "name": "release/v1",
+            "base": "develop"
+        }
+    ]
+}
