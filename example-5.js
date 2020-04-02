@@ -2,16 +2,33 @@ import {cleanConsole, createAll} from './data';
 import {flatUsersFromCompaniesAndSortByAge} from './example-4';
 const companies = createAll();
 
+/**
+ * Summarize users from companies
+ * @param {Array<any>} companies Array of companies
+ * @return {{size, average, hasCar, averageWithCar}} Users: size, age avg, how many has car
+ * and age avg from users with car
+ */
 const summary = (companies) => {
   const users = flatUsersFromCompaniesAndSortByAge(companies);
-  return users.reduce((result, user) => {
+  const summaryResult = users.reduce((result, user) => {
+    result.sumAge += user.age;
+    if (user.car == true) {
+      result.sumAgeHasCar += user.age;
+      result.hasCar += 1;
+    }
     return result;
   }, {
-    size: 0,
-    average: 0,
+    sumAge: 0,
+    sumAgeHasCar: 0,
     hasCar: 0,
-    averageWithCar: 0,
   });
+
+  const size = users.length;
+  const average = summaryResult.sumAge / size;
+  const {hasCar} = summaryResult;
+  const averageWithCar = summaryResult.sumAgeHasCar / hasCar;
+
+  return {size, average, hasCar, averageWithCar};
 };
 
 cleanConsole(5, companies);
