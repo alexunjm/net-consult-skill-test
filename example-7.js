@@ -33,7 +33,7 @@ const getIndexOfCompanyById = (companyId) => {
  * @param {Number} userId id of user to get index
  * @return {{indexCompany, indexUser}} index of companies array
  */
-const getIndexOfUserCompany = (companyId, userId) => {
+const getIndexOfCompanyUser = (companyId, userId) => {
   const indexCompany = getIndexOfCompanyById(companyId);
   const indexUser = getIndexById(userId, companies[indexCompany].users);
   return {indexCompany, indexUser};
@@ -174,29 +174,113 @@ console.log('---- EXAMPLE 7 part 5 --- ', putCompany(4));
  * @return {Object} company updated
  */
 const removeUser = (companyId, userId) => {
-  const indexes = getIndexOfUserCompany(companyId, userId);
+  const indexes = getIndexOfCompanyUser(companyId, userId);
   const result = companies[indexes.indexCompany].users.splice(indexes.indexUser, 1);
   companies[indexes.indexCompany].usersLength = companies[indexes.indexCompany].users.length;
   return {result, company: companies[indexes.indexCompany]};
 };
 
 console.log('---- EXAMPLE 7 part 6 --- ', removeUser(4, 1));
-console.log('---- EXAMPLE 7 part 7 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 8 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 9 --- ', 'Put here your function');
+
 
 // Parte 7: Crear una función tomando como parámetro un "id" de "company" y un
 // "id" de "user" que permite hacer un PATCH (como con una llamada HTTP) en este
 // "user".
 
+/**
+ * get url and body to make patch (this is a sim)
+ * @param {Number} companyId id of company
+ * @param {Number} userId id of user
+ * @return {Object} object with url an body
+ */
+const patchUser = (companyId, userId) => {
+  const indexes = getIndexOfCompanyUser(companyId, userId);
+  const user = {...companies[indexes.indexCompany].users[indexes.indexUser], updated: true};
+  delete user.updated;
+
+  const url = `https://alexanderjaramillo.com/company/${companyId}/user/${userId}`;
+  const body = JSON.stringify(user);
+  /*
+  fetch(url, {
+    method: 'PATCH',
+    body,
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+      .then((response) => response.json())
+      .then((json) => console.log(json));*/
+  return {url, body};
+};
+
+console.log('---- EXAMPLE 7 part 7 --- ', patchUser(5, 4));
 // Parte 8: Crear una función tomando como parámetro un "id" de "company" y un
 // "id" de "user" que permite hacer un PUT (como con una llamada HTTP) en este
 // "user".
+
+/**
+ * get url and body to make put (this is a sim)
+ * @param {Number} companyId id of company
+ * @param {Number} userId id of user
+ * @return {Object} object with url an body
+ */
+const putUser = (companyId, userId) => {
+  const indexes = getIndexOfCompanyUser(companyId, userId);
+  const user = {...companies[indexes.indexCompany].users[indexes.indexUser], updated: true};
+  delete user.updated;
+
+  const url = `https://alexanderjaramillo.com/company/${companyId}/user/${userId}`;
+  const body = JSON.stringify(user);
+  /*
+  const xhr = new XMLHttpRequest();
+  xhr.open('PUT', url, true);
+  xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  xhr.onload = () => {
+    const company = JSON.parse(xhr.responseText);
+    if (xhr.readyState == 4 && xhr.status == '200') {
+      // success
+    } else {
+      // error
+    }
+  }
+  xhr.send(json); */
+
+  return {url, body};
+};
+console.log('---- EXAMPLE 7 part 8 --- ', putUser(5, 4));
 
 // Parte 9: Crear una función tomando como parámetro dos "id" de "company" y
 // un "id" de "user". La función debe permitir que el user sea transferido de la
 // primera "company" a la segunda "company". El atributo "usersLength" de cada
 // "company" debe actualizarse.
+
+/**
+ * Transfer a user from source company to destination company
+ * @param {Number} fromCompanyId id of source company
+ * @param {Number} toCompanyId id of destination company
+ * @param {Number} userId id of user to transfer
+ * @return {Object} object with src, dest, and user transfered
+ */
+const transferUser = (fromCompanyId, toCompanyId, userId) => {
+  const indexesFrom = getIndexOfCompanyUser(fromCompanyId, userId);
+  const indexTo = getIndexOfCompanyById(toCompanyId);
+
+  const srcCompany = companies[indexesFrom.indexCompany];
+  const destCompany = companies[indexTo];
+
+  console.log({companies, indexesFrom, indexTo});
+
+  const users = srcCompany.users.splice(indexesFrom.indexUser, 1);
+
+  if (users.length > 0) {
+    srcCompany.usersLength = srcCompany.users.length;
+    destCompany.users.push(users[0]);
+    destCompany.usersLength = destCompany.users.length;
+  }
+  return {srcCompany, destCompany, user: users[0]};
+};
+
+console.log('---- EXAMPLE 7 part 9 --- ', transferUser(5, 6, 1));
 
 // -----------------------------------------------------------------------------
 // INSTRUCTIONS IN ENGLISH
