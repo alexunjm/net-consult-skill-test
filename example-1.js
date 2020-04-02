@@ -17,7 +17,7 @@ const capitalize = (str) => {
  */
 const cleanAndFormatCompaniesProperties = (companies) => {
   companies.forEach((company) => {
-    company.users.map((user) => {
+    company.users = company.users.map((user) => {
       for (const key in user) {
         if (user.hasOwnProperty(key)) {
           const value = user[key];
@@ -27,7 +27,7 @@ const cleanAndFormatCompaniesProperties = (companies) => {
       user.firstName = capitalize(user.firstName);
       user.lastName = capitalize(user.lastName);
       return user;
-    });
+    }).sort((u1, u2) => u1.firstName < u2.firstName ? -1 : 1);
     company.name = capitalize(company.name);
   });
   // sort by users length (decreasing order) and return
