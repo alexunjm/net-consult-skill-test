@@ -23,6 +23,10 @@
         {
             "name": "feature/exercise6",
             "base": "develop"
+        },
+        {
+            "name": "feature/exercise7",
+            "base": "develop"
         }
     ]
 }
