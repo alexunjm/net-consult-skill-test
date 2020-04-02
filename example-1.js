@@ -85,3 +85,6 @@ console.log('---- EXAMPLE 1 --- ', cleanAndFormatCompaniesProperties(companies))
 // le nom et le prénom de chaque "user".
 // Les "companies" doivent être triées par leur nombre de "user" (ordre décroissant)
 // et les "users" de chaque "company" doivent être classés par ordre alphabétique.
+
+
+export {capitalize, cleanAndFormatCompaniesProperties};

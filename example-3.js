@@ -1,9 +1,37 @@
 import {cleanConsole, createAll} from './data';
+import {capitalize, cleanAndFormatCompaniesProperties} from './example-1';
 
 const companies = createAll();
 
+/**
+ * Check if company name, user firstName or lastName has capital letter
+ * @param {Arary<any>} companies Array of companies to check
+ * @return {Boolean} false if any property has no Capital letter
+ */
+const checkCaseOfCompanies = (companies) => {
+  companies = cleanAndFormatCompaniesProperties(companies);
+  // for each company checks with capitalize function each property
+  for (let i = 0; i < companies.length; i++) {
+    const company = companies[i];
+    // checks company name; if not equals return false
+    if (company.name !== capitalize(company.name)) {
+      return false;
+    }
+    for (let j = 0; j < company.users.length; j++) {
+      const user = company.users[j];
+      // checks user firstName and lastName; if not equals return false
+      if (user.firstName !== capitalize(user.firstName)) {
+        return false;
+      } else if (user.lastName !== capitalize(user.lastName)) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
+
 cleanConsole(3, companies);
-console.log('---- EXAMPLE 3 --- ', 'Put here your function');
+console.log('---- EXAMPLE 3 --- ', checkCaseOfCompanies(companies));
 
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
