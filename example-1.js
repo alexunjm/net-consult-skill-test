@@ -10,6 +10,11 @@ const capitalize = (str) => {
   return str.substr(0, 1).toUpperCase() + str.substr(1);
 };
 
+/**
+ * Clean and format each company property of companies
+ * @param {Array<any>} companies array of companies to clean and format
+ * @return {Array<any>} the result of array cleaned and formated.
+ */
 const cleanAndFormatCompaniesProperties = (companies) => {
   companies.forEach((company) => {
     company.users.map((user) => {
@@ -25,7 +30,8 @@ const cleanAndFormatCompaniesProperties = (companies) => {
     });
     company.name = capitalize(company.name);
   });
-  return companies;
+  // sort by users length (decreasing order) and return
+  return companies.sort((c1, c2) => c2.users.length - c1.users.length);
 };
 
 cleanConsole(1, companies);
