@@ -28,5 +28,11 @@
             "name": "feature/exercise7",
             "base": "develop"
         }
+    ],
+    "gitflow4code.releases": [
+        {
+            "name": "release/v1",
+            "base": "develop"
+        }
     ]
 }

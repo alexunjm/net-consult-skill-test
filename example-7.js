@@ -4,6 +4,7 @@ const companies = createAll();
 cleanConsole(7, companies);
 
 /**
+ * *******************************************************************************
  * get the index of array by id
  * @param {Number} id id to find
  * @param {Array<{id}>} arr array to loop
@@ -19,6 +20,7 @@ const getIndexById = (id, arr) => {
 };
 
 /**
+ * *******************************************************************************
  * get the index of company by id in companies array
  * @param {Number} companyId id of company to get index
  * @return {Number} index of companies array
@@ -28,6 +30,7 @@ const getIndexOfCompanyById = (companyId) => {
 };
 
 /**
+ * *******************************************************************************
  * get the index of company and user in companies array
  * @param {Number} companyId id of company to get index
  * @param {Number} userId id of user to get index
@@ -46,6 +49,7 @@ const getIndexOfCompanyUser = (companyId, userId) => {
 // devolviendo el nombre de esta "company".
 
 /**
+ * *******************************************************************************
  * Get a name of company found on companies array
  * @param {Number} companyId id of company to get name
  * @return {String} Name of company found
@@ -60,6 +64,7 @@ console.log('---- EXAMPLE 7 part 1 --- ', getCompanyName(1));
 // quitando la "company" de la lista.
 
 /**
+ * *******************************************************************************
  * Remove a company from companies array
  * @param {Number} companyId id of company
  * @return {Object} deleted company
@@ -75,13 +80,12 @@ console.log('---- EXAMPLE 7 part 2 --- ', removeCompany(1));
 // atributos de esta "company" excepto en el atributo "users".
 
 /**
+ * *******************************************************************************
  * get url and body to make patch (this is a sim)
  * @param {Number} companyId id of company
  * @return {Object} object with url an body
  */
 const patchCompany = (companyId) => {
-  // PATCH to the resource id = 1
-  // update that task is completed
   const index = getIndexOfCompanyById(companyId);
   const company = {...companies[index], updated: true};
   delete company.updated;
@@ -111,6 +115,7 @@ console.log('---- EXAMPLE 7 part 3 --- ', patchCompany(2));
 // el atributo "usersLength" de "company".
 
 /**
+ * *******************************************************************************
  * Add new user to Company users property
  * @param {Number} companyId id of company
  * @param {{firstName: 'Juan', lastName: 'Delgado', age: 35, car: true}} user Optional user to add
@@ -133,6 +138,7 @@ console.log('---- EXAMPLE 7 part 4 --- ', addNewUser(3));
 // en el atributo "users".
 
 /**
+ * *******************************************************************************
  * get url and body to make put (this is a sim)
  * @param {Number} companyId id of company
  * @return {Object} object with url an body
@@ -168,6 +174,7 @@ console.log('---- EXAMPLE 7 part 5 --- ', putCompany(4));
 // de "company" y cambiar el atributo "usersLength" de "company".
 
 /**
+ * *******************************************************************************
  * Remove user to Company users property
  * @param {Number} companyId id of company
  * @param {Number} userId id of user
@@ -188,6 +195,7 @@ console.log('---- EXAMPLE 7 part 6 --- ', removeUser(4, 1));
 // "user".
 
 /**
+ * *******************************************************************************
  * get url and body to make patch (this is a sim)
  * @param {Number} companyId id of company
  * @param {Number} userId id of user
@@ -219,6 +227,7 @@ console.log('---- EXAMPLE 7 part 7 --- ', patchUser(5, 4));
 // "user".
 
 /**
+ * *******************************************************************************
  * get url and body to make put (this is a sim)
  * @param {Number} companyId id of company
  * @param {Number} userId id of user
@@ -255,6 +264,7 @@ console.log('---- EXAMPLE 7 part 8 --- ', putUser(5, 4));
 // "company" debe actualizarse.
 
 /**
+ * *******************************************************************************
  * Transfer a user from source company to destination company
  * @param {Number} fromCompanyId id of source company
  * @param {Number} toCompanyId id of destination company
