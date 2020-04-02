@@ -1,0 +1,8 @@
+{
+    "gitflow4code.features": [
+        {
+            "name": "feature/exercise1",
+            "base": "develop"
+        }
+    ]
+}
