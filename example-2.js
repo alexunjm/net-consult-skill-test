@@ -1,9 +1,16 @@
 import {cleanConsole, createAll} from './data';
 const companies = createAll();
 
+/**
+ * Filter users company property, checking that car property of each user is equal to hasCar param
+ * @param {Array<any>} companies Array of companies to filter users property
+ * @param {Boolean} hasCar value to check user car property
+ * @return {Array<any>} the result companies with filtered users for each company.
+ */
 const filterUsersFromCompaniesWithCar = (companies, hasCar) => {
-  return companies.filter((company) => {
+  return companies.map((company) => {
     company.users = company.users.filter((user) => user.car == hasCar);
+    company.usersLength = company.users.length;
     return company;
   });
 };
