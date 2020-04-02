@@ -1,22 +1,17 @@
 import {createAll, cleanConsole} from './data';
 const companies = createAll();
 
-const camalize = (str) =>{
-  const result = str.toLowerCase();
-  return result.substr(0, 1).toUpperCase() + result.substr(1);
-};
-
-const firstWordToCamelCase = (str) => {
-  const tmpArr = str.toLowerCase().split(' ');
-  tmpArr.splice(0, 1, camalize(tmpArr[0]));
-  console.log(tmpArr);
-  return tmpArr.join(' ');
+/**
+ * Changes the first letter of string to uppercase
+ * @param {string} str string to transform
+ * @return {string} the result of string transformed.
+ */
+const capitalize = (str) => {
+  return str.substr(0, 1).toUpperCase() + str.substr(1);
 };
 
 const cleanAndFormatCompaniesProperties = (companies) => {
   companies.forEach((company) => {
-    company.name = firstWordToCamelCase(company.name);
-    console.log(company.name);
     company.users.map((user) => {
       for (const key in user) {
         if (user.hasOwnProperty(key)) {
@@ -24,8 +19,11 @@ const cleanAndFormatCompaniesProperties = (companies) => {
           user[key] = value ? value : '';
         }
       }
+      user.firstName = capitalize(user.firstName);
+      user.lastName = capitalize(user.lastName);
       return user;
     });
+    company.name = capitalize(company.name);
   });
   return companies;
 };
