@@ -27,7 +27,15 @@ const cleanAndFormatCompaniesProperties = (companies) => {
       user.firstName = capitalize(user.firstName);
       user.lastName = capitalize(user.lastName);
       return user;
-    }).sort((u1, u2) => u1.firstName < u2.firstName ? -1 : 1);
+    }).sort((u1, u2) => {
+      if (u1.firstName < u2.firstName) {
+        return -1;
+      } else if (u1.firstName === u2.firstName) {
+        return u1.lastName < u2.lastName ? -1 : 1;
+      } else {
+        return 1;
+      }
+    });
     company.name = capitalize(company.name);
   });
   // sort by users length (decreasing order) and return
