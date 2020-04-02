@@ -90,7 +90,23 @@ console.log('---- EXAMPLE 7 part 3 --- ', patchCompany(2));
 // "company" y tener un "id" generado automáticamente. La función también debe modificar
 // el atributo "usersLength" de "company".
 
-console.log('---- EXAMPLE 7 part 4 --- ', 'Put here your function');
+/**
+ * Add new user to Company users property
+ * @param {Number} companyId id of company
+ * @param {{firstName: 'Juan', lastName: 'Delgado', age: 35, car: true}} user Optional user to add
+ * @return {Object} object with url an body
+ */
+const addNewUser = (companyId, user = {firstName: 'Juan', lastName: 'Delgado', age: 35, car: true}) => {
+  const index = getIndexOfCompanyById(companyId);
+  companies[index].users.push({
+    ...user,
+    id: companies[index].users.reduce((max, user) => max < user.id ? user.id : max, 0) + 1,
+  });
+  companies[index].usersLength = companies[index].users.length;
+  return companies[index];
+};
+
+console.log('---- EXAMPLE 7 part 4 --- ', addNewUser(3));
 console.log('---- EXAMPLE 7 part 5 --- ', 'Put here your function');
 console.log('---- EXAMPLE 7 part 6 --- ', 'Put here your function');
 console.log('---- EXAMPLE 7 part 7 --- ', 'Put here your function');
