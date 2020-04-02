@@ -1,8 +1,21 @@
 import {cleanConsole, createAll} from './data';
+import {flatUsersFromCompaniesAndSortByAge} from './example-4';
 const companies = createAll();
 
+const summary = (companies) => {
+  const users = flatUsersFromCompaniesAndSortByAge(companies);
+  return users.reduce((result, user) => {
+    return result;
+  }, {
+    size: 0,
+    average: 0,
+    hasCar: 0,
+    averageWithCar: 0,
+  });
+};
+
 cleanConsole(5, companies);
-console.log('---- EXAMPLE 5 --- ', 'Put here your function');
+console.log('---- EXAMPLE 5 --- ', summary(companies));
 
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL

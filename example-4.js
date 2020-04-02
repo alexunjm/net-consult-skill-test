@@ -55,3 +55,5 @@ console.log('---- EXAMPLE 4 --- ', flatUsersFromCompaniesAndSortByAge(companies)
 // doit avoir un nouvel attribut "company" ayant pour valeur le nom de la "company"
 // à laquelle il appartient. Les "users" doivent être triés en fonction de leur
 // âge (du plus vieux au plus jeune).
+
+export {flatUsersFromCompaniesAndSortByAge};
