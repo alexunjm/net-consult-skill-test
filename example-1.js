@@ -1,8 +1,12 @@
 import {createAll, cleanConsole} from './data';
 const companies = createAll();
 
+const cleanAndFormatCompaniesProperties = (companies) => {
+  return companies;
+};
+
 cleanConsole(1, companies);
-console.log('---- EXAMPLE 1 --- ', 'Put here your function');
+console.log('---- EXAMPLE 1 --- ', cleanAndFormatCompaniesProperties(companies));
 
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
