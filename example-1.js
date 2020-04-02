@@ -16,23 +16,34 @@ const capitalize = (str) => {
  * @return {Array<any>} the result of array cleaned and formated.
  */
 const cleanAndFormatCompaniesProperties = (companies) => {
+  /**
+   * for each company, format user data and company name
+   */
   companies.forEach((company) => {
     company.users = company.users.map((user) => {
+      // set empty string to undefined user properties
       for (const key in user) {
         if (user.hasOwnProperty(key)) {
           const value = user[key];
           user[key] = value ? value : '';
         }
       }
+      // capitalize firstName and lastName
       user.firstName = capitalize(user.firstName);
       user.lastName = capitalize(user.lastName);
+
+      // return user data formated
       return user;
-    }).sort((u1, u2) => {
+    }).sort((u1, u2) => {/* sort desc by firstName and lastName */
+      // check firstName order
       if (u1.firstName < u2.firstName) {
+        // return -1 when u1 go first than u2
         return -1;
       } else if (u1.firstName === u2.firstName) {
+        // if firstName is the same, order by lastName too
         return u1.lastName < u2.lastName ? -1 : 1;
       } else {
+        // return 1 when u2 go first than u1
         return 1;
       }
     });
