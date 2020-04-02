@@ -1,10 +1,8 @@
 import {cleanConsole, createAll} from './data';
-
 const companies = createAll();
 
 cleanConsole(7, companies);
-console.log('---- EXAMPLE 7 part 1 --- ', 'Put here your function');
-console.log('---- EXAMPLE 7 part 2 --- ', 'Put here your function');
+
 console.log('---- EXAMPLE 7 part 3 --- ', 'Put here your function');
 console.log('---- EXAMPLE 7 part 4 --- ', 'Put here your function');
 console.log('---- EXAMPLE 7 part 5 --- ', 'Put here your function');
@@ -18,6 +16,16 @@ console.log('---- EXAMPLE 7 part 9 --- ', 'Put here your function');
 
 // Parte 1: Crear una función tomando como parámetro un "id" de "company" y
 // devolviendo el nombre de esta "company".
+
+const getCompany = (companyId) => {
+  for (let i = 0; i < companies.length; i++) {
+    if (companies[i].id == companyId) {
+      return companies[i].name;
+    }
+  }
+  return '';
+};
+console.log('---- EXAMPLE 7 part 1 --- ', getCompany(1));
 
 // Parte 2: Crear una función tomando como parámetro un "id" de "company" y
 // quitando la "company" de la lista.
