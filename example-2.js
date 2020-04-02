@@ -1,8 +1,12 @@
 import {cleanConsole, createAll} from './data';
 const companies = createAll();
 
+const filterUsersFromCompaniesWithCar = (companies, hasCar) => {
+  return companies;
+};
+
 cleanConsole(2, companies);
-console.log('---- EXAMPLE 2 --- ', 'Put here your function');
+console.log('---- EXAMPLE 2 --- ', filterUsersFromCompaniesWithCar(companies, true));
 
 // -----------------------------------------------------------------------------
 // INSTRUCCIONES EN ESPAÑOL
