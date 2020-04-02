@@ -19,6 +19,10 @@
         {
             "name": "feature/exercise5",
             "base": "develop"
+        },
+        {
+            "name": "feature/exercise6",
+            "base": "develop"
         }
     ]
 }
